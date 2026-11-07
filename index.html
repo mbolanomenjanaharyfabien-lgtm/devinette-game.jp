@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jeux devinette</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Jeux. <span class="logo">jp</span></h1>
+            </div>
+            <div class="mode">
+                <i>Sombre</i>
+                <i>Clair</i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="tab_bord">
+            <section class="chrono">
+                <p>00 : 00 : 00</p>
+            </section>
+            <section class="score">
+                <p>Score : <span id="score">0</span></p>
+            </section>
+        </section>
+
+        <section class="titre">
+            <h1 id="titre">Deviner un nombre entre 1 à 10</h1>
+        </section>
+        <section class="input">
+            <input type="text" placeholder="_" required>
+        </section>
+        <section class="bouton">
+            <button class="btn">Confirmer</button>
+            <button class="btn">Annuler</button>
+        </section>
+        <section class="message">
+            <p>Vous avez trois tentative</p>
+        </section>
+    </main>
+
+    <div id="modal-fin" class="modal-overlay">
+        <div class="modal-content">
+            <h2 id="modal-titre"></h2>
+            <p id="modal-texte"></p>
+            <button id="modal-btn" class="btn">Rejouer</button>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

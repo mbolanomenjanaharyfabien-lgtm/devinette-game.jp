@@ -1,66 +1,231 @@
-const modeSombreBtn = document.querySelector(".mode i:first-child");
-const modeClairBtn = document.querySelector(".mode i:last-child");
-const chrono = document.querySelector(".chrono p");
-const score = document.getElementById("score");
-const input = document.querySelector(".input input");
-const btn_confirmer = document.querySelector(".bouton .btn:first-child");
-const btn_annuler = document.querySelector(".bouton .btn:last-child");
-const message = document.querySelector(".message p");
-
-let nombreSecret = Math.floor(Math.random()) + 1;
 let tentatives = 3;
-let score = 0;
-let secondes = 0;
-let chronoInterval = null;
-
-btn_confirmer.addEventListener("click", verifier);
-
-btn_annuler.addEventListener("click", () => {
-    input.value = "";
-    message.textContent = "Saisie annulée";
-});
-
-input.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") verifier();
-});
-function verifier() {
-    demarrerChrono();
-    let valeur = parseInt(inputEl.value);
-
-    if (isNaN(valeur) || valeur < 1 || valeur > 10) {
-        message.textContent = "Entre un nombre entre 1 et 10 !";
+let scores = 0;
+let nombreSecret = Math.floor(Math.random())+1;
+function confirmer(){
+    let time = document.querySelector(".time")
+    let score = document.getElementById("score");
+    let input = document.querySelector(".input input")
+    let message = document.querySelector(".message p:first-child");
+    let alert = document.querySelector(".alert");
+    let tentative = document.getElementById("tentative");
+    let titre = document.getElementById("titre");
+      
+    if (input.value < 1 || input.value > 10 || input.value === "") {
+        
+        titre.textContent = "Entre un nombre entre 1 et 10 !";
+        input.value ="";
+        tentatives --;
+        tentative.innerHTML = tentatives;
         return;
     }
-
-    tentatives--;
-
-    if (valeur === nombreSecret) {
-        score += 1;
-        score.textContent = score;
-        message.textContent = ` Gagné ! C'était bien ${nombreSecret}.`;
-        finPartie();
-    } else if (tentatives > 0) {
-        let indice = valeur < nombreSecret ? "plus grand" : "plus petit";
-        message.textContent = ` C'est ${indice}. Il te reste ${tentatives} tentative(s).`;
-    } else {
-        message.textContent = ` Perdu ! C'était ${nombreSecret}.`;
-        finPartie();
+    else if ( input.value != nombreSecret) {
+        tentatives --;
+        tentative.innerHTML = tentatives;
+        return;
     }
-
-    inputEl.value = "";
+    else if  (tentatives === 0 ){
+        tentative.innerHTML = "0";
+        titre.innerHTML = " Vous avez perdu ! ";
+    }
+    else {
+        titre.innerHTML = " Vous avez gagnier ! ";
+        scores ++;
+        score.innerHTML = scores;
+        
+    }   
 }
 
-
-function rejouer() {
-    nombreSecret = Math.floor(Math.random() * 10) + 1;
-    tentatives = 3;
-    secondes = 0;
-    chronoInterval = null;
-    chronoEl.textContent = "00 : 00 : 00";
-    input.disabled = false;
+function continuer(){
+    let input = document.querySelector(".input input");
+    let tentative = document.getElementById("tentative");
+    let titre = document.getElementById("titre");
+    titre.innerHTML= "Deviner un nombre entre 1 à 10";
+    tentative.innerHTML= "3";
     input.value = "";
-    message.textContent = "Vous avez trois tentative";
-    btn_confirmer.textContent = "Confirmer";
-    btn_confirmer.removeEventListener("click", rejouer);
-    btn_confirmer.addEventListener("click", verifier);
+    tentatives = 3;
+    nombreSecret = Math.floor(Math.random() * 10)+1;
+    continuer();
+    confirmer();
 }
+
+// function annuler(){
+//     let time = document.querySelector(".time")
+//     let score = document.getElementById("score");
+//     let input = document.querySelector(".input input")
+//     let message = document.querySelector(".message p:first-child");
+//     let alert = document.querySelector(".alert");
+//     let tentative = document.getElementById("tentative");
+//     let titre = document.getElementById("titre"); 
+//     titre.innerHTML= "Deviner un nombre entre 1 à 10";
+//     input.value = "";
+//     tentatives ++;
+//     if  (tentatives === 5){
+//         tentative.innerHTML = 3;
+//         titre.textContent = " Vous avez perdu ! Trop d'annulation ";
+//     }
+// }
+
+function sombre(){
+    document.body.style.backgroundColor ="rgb(12, 18, 32)";
+    let header = document.getElementById ("header");
+    header.style.backgroundColor = "rgb(12, 18, 32)";
+    let mode = document.querySelector(".mode");
+    mode.style.backgroundColor = "rgb(12, 18, 32)";
+    let main = document.getElementById("main");
+    main.style.backgroundColor = " rgb(12, 18, 32)";
+    main.style.border = " 2px solid rgb(49, 49, 54)";
+    let tab_bord = document.querySelector(".tab_bord");
+    tab_bord.style.backgroundColor = "  rgb(12, 18, 32)";
+    tab_bord.style.border = " 2px solid rgb(49, 49, 54)";
+    let titre = document.getElementById("titre");
+    titre.style.colorv= " rgb(49, 49, 54)";
+    let input = document.getElementById("input");
+    input.style.backgroundColor = " transparent";
+    input.style.color = " rgb(49, 49, 54)";  
+    let btn = document.querySelector(".btn");  
+    btn.firstChild.style.backgroundColor = " transparent"
+    btn.firstChild.style.color = " rgb(49, 49, 54)"
+    btn.lastChild.style.backgroundColor = " rgb(12, 18, 32)"
+    let annuler = document.querySelector(".btn_annuler"); 
+    annuler.style.backgroundColor = " rgb(12, 18, 32)"
+    annuler.style.border = " 2px solid rgb(49, 49, 54)"
+    annuler.style.color = " rgb(49, 49, 54)"
+
+}
+
+
+
+
+
+
+
+
+// let tentatives = 3;
+// let scores = 0;
+// let nombreSecret = Math.floor(Math.random());
+// function confirmer(){
+//     let time = document.querySelector(".time")
+//     let score = document.getElementById("score");
+//     let input = document.querySelector(".input input")
+//     let message = document.querySelector(".message p:first-child");
+//     let alert = document.querySelector(".alert");
+//     let tentative = document.getElementById("tentative");
+//     let titre = document.getElementById("titre");
+      
+//     if (input.value < 1 || input.value > 10 || input.value === "") {
+        
+//         titre.textContent = "Entre un nombre entre 1 et 10 !";
+//         input.value ="";
+//         tentatives --;
+//         tentative.innerHTML = tentatives;
+//         return;
+//     }
+//     else if ( input.value != nombreSecret) {
+//         tentatives --;
+//         tentative.innerHTML = tentatives;
+//     }
+//     else if  (tentative === 0 ){
+//         tentative.innerHTML = 0;
+//         titre.innerHTML = " Vous avez perdu ! ";
+//     }
+//     else if (input.value === nombreSecret) {
+//         titre.innerHTML = " Vous avez gagnier ! ";
+//         scores ++;
+//         score.innerHTML = scores;
+        
+//     }   
+// }
+
+// function continuer(){
+//     let time = document.querySelector(".time")
+//     let score = document.getElementById("score");
+//     let input = document.querySelector(".input input")
+//     let message = document.querySelector(".message p:first-child");
+//     let alert = document.querySelector(".alert");
+//     let tentative = document.getElementById("tentative");
+//     let titre = document.getElementById("titre"); 
+
+//     message.innerHTML;
+//     titre.innerHTML= "Deviner un nombre entre 1 à 10";
+//     input.value = "";
+//     nombreSecret = Math.floor(Math.random() * 10);
+//     tentatives = 3;
+//     continuer();
+//     confirmer();
+// }
+
+// function annuler(){
+//     let time = document.querySelector(".time")
+//     let score = document.getElementById("score");
+//     let input = document.querySelector(".input input")
+//     let message = document.querySelector(".message p:first-child");
+//     let alert = document.querySelector(".alert");
+//     let tentative = document.getElementById("tentative");
+//     let titre = document.getElementById("titre"); 
+//     titre.innerHTML= "Deviner un nombre entre 1 à 10";
+//     input.value = "";
+//     tentatives ++;
+//     if  (tentatives === 5){
+//         tentative.innerHTML = 3;
+//         titre.textContent = " Vous avez perdu ! Trop d'annulation ";
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+// let tentatives = 3;
+// let scores = 0;
+// let nombreSecret = Math.floor(Math.random()) + 1;
+// function confirmer(){
+//     let time = document.querySelector(".time")
+//     let score = document.getElementById("score");
+//     let input = document.querySelector(".input input")
+//     let message = document.querySelector(".message p:first-child");
+//     let alert = document.querySelector(".alert");
+//     let tentative = document.getElementById("tentative");
+//     let titre = document.getElementById("titre");
+      
+//     if (input.value < 1 || input.value > 10 || input.value === "") {
+        
+//         titre.textContent = "Entre un nombre entre 1 et 10 !";
+//         input.value ="";
+//         tentatives --;
+//         tentative.innerHTML = tentatives;
+//         return;
+//     }
+//     else if ( input.value != 3) {
+//         tentatives --;
+//         tentative.innerHTML = tentatives;
+//         return;
+//     }
+//     else if  (tentatives === 0){
+//         tentative.innerHTML = 0;
+//         alert.textContent = " Vous avez perdu ! ";
+//         message.style.display = "block";
+//     }
+//     else{
+//         titre.innerHTML = " Vous avez gagnier ! ";
+//         scores ++;
+//         score.innerHTML = scores;
+        
+//     }   
+// }
+
+// function continuer(){
+//     let time = document.querySelector(".time")
+//     let score = document.getElementById("score");
+//     let input = document.querySelector(".input input")
+//     let message = document.querySelector(".message p:first-child");
+//     let alert = document.querySelector(".alert");
+//     let tentative = document.getElementById("tentative");
+//     let titre = document.getElementById("titre");   
+// }
+
